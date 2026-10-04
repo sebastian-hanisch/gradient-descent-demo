@@ -244,8 +244,9 @@ Konvergenz.
     st.plotly_chart(viz.build_backtracking_comparison_figure(bt), key="backtracking_chart",
                     use_container_width=True)
     st.caption(
-        "Backtracking (Armijo) braucht über den ganzen geprüften Konditionszahl-Bereich deutlich "
-        "weniger Iterationen als die klassische 'sichere' feste Schrittweite 1/λmax."
+        "Backtracking (Armijo) braucht bis κ=500 weniger als die halbe Iterationszahl der klassischen "
+        "'sicheren' festen Schrittweite 1/λmax; bei κ=500 und κ=2000 erreicht die feste Schrittweite "
+        "ihr Budget, ohne zu konvergieren."
     )
 
     grad_err = _gradient_check()

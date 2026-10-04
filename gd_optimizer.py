@@ -51,7 +51,10 @@ def gradient_descent(f, grad, x0, mode="backtracking", eta=0.1, A=None, max_iter
             break
     else:
         k = max_iter
-    return Result(trajectory=np.array(traj), fvals=np.array(fvals), converged=converged, n_iter=k)
+    # n_iter = Anzahl tatsaechlich ausgefuehrter Schritte (nicht der Schleifenzaehler k: bei Konvergenz
+    # bricht die Schleife in Runde k ab, bevor Schritt k gemacht wird).
+    return Result(trajectory=np.array(traj), fvals=np.array(fvals), converged=converged,
+                  n_iter=len(traj) - 1)
 
 
 def exact_step_formula(g: np.ndarray, A: np.ndarray) -> float:

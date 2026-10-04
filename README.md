@@ -30,9 +30,10 @@ Novikoff-Schranke im Perceptron-Stück) ein gültiges, aber grobes Worst-Case-Ve
 fester Schrittweite gibt es eine **scharfe** Divergenzschwelle bei genau $\eta=2/\lambda_{\max}$:
 knapp darunter ($\eta=0{,}099$) konvergiert der Abstieg (wenn auch langsam), knapp darüber
 ($\eta=0{,}101$) explodiert er um **26 Zehnerpotenzen** in nur 200 Schritten. Backtracking
-(Armijo) braucht dagegen über den ganzen geprüften Bereich weniger als die halbe Iterationszahl
-der klassischen "sicheren" festen Schrittweite $1/\lambda_{\max}$ – und ist bei $\kappa=2000$ der
-einzige der beiden Modi, der innerhalb des Budgets wirklich konvergiert.
+(Armijo) braucht dagegen bis $\kappa=500$ weniger als die halbe Iterationszahl
+der klassischen "sicheren" festen Schrittweite $1/\lambda_{\max}$ – und ist bei $\kappa=500$ und
+$\kappa=2000$ der einzige der beiden Modi, der innerhalb des Budgets wirklich konvergiert (bei
+$\kappa=2000$ ist der Vorsprung nur noch klein: 1.896 Schritte gegenüber dem Budget von 2.000).
 
 ## Warum dieses Problem
 
@@ -60,8 +61,8 @@ Budget):
 
 | Konditionszahl κ | Gemessene Rate/Schritt | Theoretische Schranke $\left(\frac{\kappa-1}{\kappa+1}\right)^2$ | Iterationen bis Konvergenz |
 |---|---|---|---|
-| 2 | 0,0830 | 0,1111 | 21 |
-| 10 | 0,5700 | 0,6694 | 102 |
+| 2 | 0,0830 | 0,1111 | 20 |
+| 10 | 0,5700 | 0,6694 | 101 |
 | 50 | 0,8287 | 0,9231 | 500 (Budget erreicht) |
 | 200 | 0,8881 | 0,9802 | 500 (Budget erreicht) |
 
@@ -81,11 +82,11 @@ $=1/\lambda_{\max}$):
 
 | κ | Iterationen (fest) | Iterationen (Backtracking) | f am Ende (fest) | f am Ende (Backtracking) |
 |---|---|---|---|---|
-| 5 | 90 | 44 | $4{,}73\cdot10^{-21}$ | $1{,}87\cdot10^{-21}$ |
-| 20 | 387 | 132 | $4{,}88\cdot10^{-21}$ | $3{,}15\cdot10^{-21}$ |
-| 100 | 1.970 | 888 | $4{,}98\cdot10^{-21}$ | $3{,}22\cdot10^{-21}$ |
-| 500 | 2.000 (Budget) | 501 | $3{,}61\cdot10^{-7}$ | $3{,}89\cdot10^{-21}$ |
-| 2.000 | 2.000 (Budget) | 1.897 | $1{,}03\cdot10^{-2}$ | $4{,}62\cdot10^{-21}$ |
+| 5 | 89 | 43 | $4{,}73\cdot10^{-21}$ | $1{,}87\cdot10^{-21}$ |
+| 20 | 386 | 131 | $4{,}88\cdot10^{-21}$ | $3{,}15\cdot10^{-21}$ |
+| 100 | 1.969 | 887 | $4{,}98\cdot10^{-21}$ | $3{,}22\cdot10^{-21}$ |
+| 500 | 2.000 (Budget) | 500 | $3{,}61\cdot10^{-7}$ | $3{,}89\cdot10^{-21}$ |
+| 2.000 | 2.000 (Budget) | 1.896 | $1{,}03\cdot10^{-2}$ | $4{,}62\cdot10^{-21}$ |
 
 Ab $\kappa=500$ erreicht die feste Schrittweite ihr Budget, **ohne wirklich konvergiert zu sein**
 – Backtracking dagegen liegt bei jeder Konditionszahl auf Maschinengenauigkeit.
@@ -95,7 +96,7 @@ Ab $\kappa=500$ erreicht die feste Schrittweite ihr Budget, **ohne wirklich konv
 | Modus | Iterationen | Konvergiert? | f am Ende |
 |---|---|---|---|
 | Feste Schrittweite η=0,001 (Budget 5.000) | 5.000 (Budget) | Nein | $3{,}76\cdot10^{-3}$ |
-| Backtracking (Armijo) | 768 | Ja | $1{,}19\cdot10^{-20}$ |
+| Backtracking (Armijo) | 767 | Ja | $1{,}19\cdot10^{-20}$ |
 
 ## Modell und Verfahren
 
@@ -128,7 +129,7 @@ Stücken) – dieses Stück zeigt Gradientenabstieg für sich, nicht im Wettbewe
 
 ## Tests
 
-34 Tests, `python -m pytest tests/ -v` (Laufzeit lokal ~3,4 Sekunden – alle Sweeps sind reine,
+40 Tests, `python -m pytest tests/ -v` (Laufzeit lokal ~8 Sekunden – alle Sweeps sind reine,
 schnelle lineare Algebra ohne Trainings-Chaotik):
 - `test_functions.py` – Testfunktionen, Konditionszahl-Konstruktion, Gradienten gegen finite
   Differenzen.
@@ -137,6 +138,9 @@ schnelle lineare Algebra ohne Trainings-Chaotik):
 - `test_claims.py` – jede Zahl oben nachgerechnet, mit Toleranzband (Modul-Fixtures für die
   teureren Sweeps).
 - `test_presets.py`, `test_app.py` – Presets, Regler-Extremwerte, Funktionswechsel, Footer.
+- `test_oracle_gradient_descent.py` – unabhängige Orakel: Eigenzerlegung (Pfad und Schrittzahl bei fester
+  Schrittweite), `scipy.optimize` (Liniensuche, Rosenbrock-Gradient/Hesse-Matrix, BFGS-Minimum),
+  Kantorowitsch-Schranke je Schritt.
 
 ## Dateistruktur
 
