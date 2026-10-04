@@ -90,7 +90,7 @@ st.markdown(
     "misst beides selbst, statt es nur zu behaupten."
 )
 st.caption(
-    "Wurzel der 'Nichtlineare Optimierung'-Reihe. Geplante Folgestücke (noch nicht gebaut): "
+    "Wurzel der 'Nichtlineare Optimierung'-Reihe. Folgestücke (alle gebaut): "
     "Newton-Verfahren, Quasi-Newton (BFGS/L-BFGS), Lagrange/KKT, Straf-/Barriere-Verfahren, "
     "SQP, Innere-Punkte-Verfahren, Stochastische Gradientenverfahren."
 )
@@ -266,7 +266,7 @@ Konvergenz.
 
 st.markdown("---")
 st.caption(
-    "Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) "
-    "– Operations Research und Machine Learning. Interesse an einer maßgeschneiderten Lösung "
-    "für Ihr Unternehmen? [Kontakt aufnehmen](https://sebastianhanisch.net/kontakt.html)"
+    "Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – "
+    "Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). "
+    "Mehr zur Reihe: [Nichtlineare Optimierung: acht Stücke, zwei Äste](https://sebastianhanisch.net/konzepte-nichtlineare-optimierung.html)."
 )

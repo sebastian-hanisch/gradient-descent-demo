@@ -13,13 +13,13 @@ ist und wie die **Schrittweite** gewählt wird – beides hier selbst gemessen s
 
 ```
 Gradientenabstieg (WURZEL)                       [DIESES STÜCK]
- └─ Newton-Verfahren                             [nicht gebaut]
-      └─ Quasi-Newton (BFGS/L-BFGS)               [nicht gebaut]
-           └─ Lagrange-Multiplikatoren/KKT        [nicht gebaut]
-                ├─ Straf-/Barriere-Verfahren      [nicht gebaut]
-                └─ SQP                            [nicht gebaut]
-                     └─ Innere-Punkte-Verfahren   [nicht gebaut]
- └─ Stochastische Gradientenverfahren             [nicht gebaut, letztes Stück]
+ └─ Newton-Verfahren                             [gebaut]
+      └─ Quasi-Newton (BFGS/L-BFGS)               [gebaut]
+           └─ Lagrange-Multiplikatoren/KKT        [gebaut]
+                ├─ Straf-/Barriere-Verfahren      [gebaut]
+                └─ SQP                            [gebaut]
+                     └─ Innere-Punkte-Verfahren   [gebaut]
+ └─ Stochastische Gradientenverfahren             [gebaut, letztes Stück]
 ```
 
 **Ergebnis in Kürze:** Bei exakter Liniensuche auf einer Quadratik mit Konditionszahl $\kappa$
@@ -172,3 +172,7 @@ streamlit run app.py
 - Cauchy, A.-L. (1847). *Méthode générale pour la résolution des systèmes d'équations
   simultanées.* Comptes Rendus de l'Académie des Sciences, 25, 536–538.
 - Nocedal, J. & Wright, S. J. (2006). *Numerical Optimization* (2. Aufl.). Springer.
+
+---
+
+Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). Mehr zur Reihe: [Nichtlineare Optimierung: acht Stücke, zwei Äste](https://sebastianhanisch.net/konzepte-nichtlineare-optimierung.html).
