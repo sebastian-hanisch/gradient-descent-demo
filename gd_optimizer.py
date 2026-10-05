@@ -32,7 +32,7 @@ def gradient_descent(f, grad, x0, mode="backtracking", eta=0.1, A=None, max_iter
             step = eta
         elif mode == "exact":
             if A is None:
-                raise ValueError("mode='exact' braucht A (nur fuer Quadratiken definiert)")
+                raise ValueError("mode='exact' braucht A (nur für Quadratiken definiert)")
             denom = float(g @ A @ g)
             step = gnorm2 / denom if denom > 0 else eta
         elif mode == "backtracking":
